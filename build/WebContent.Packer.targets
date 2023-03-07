@@ -45,4 +45,8 @@
       <EmbeddedResource Include="$(_ViewDebugConfigFilename)" />
     </ItemGroup>
   </Target>
+
+  <Target Name="CleanItems" BeforeTargets="Clean" Condition="Exists('$(ViewPackageRoot)dist')">
+    <RemoveDir Directories="$(ViewPackageRoot)dist" />
+  </Target>
 </Project>
