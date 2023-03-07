@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+  <metadata>
+    <id>WebContent.Packer</id>
+    <title>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</title>
+    <summary>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</summary>
+    <description>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</description>
+    <version>1.0.1</version>
+    <authors>KaivnD</authors>
+    <owners>KaivnD</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <releaseNotes>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</releaseNotes>
+    <tags>web content pack</tags>
+  </metadata>
+</package>

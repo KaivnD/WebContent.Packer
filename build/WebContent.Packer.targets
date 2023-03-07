@@ -1,0 +1,48 @@
+<Project>
+  <PropertyGroup>
+    <ViewPackageRoot Condition="'$(ViewPackageRoot)' == ''">Views/</ViewPackageRoot>
+    <DefaultNpmClient Condition="'$(DefaultNpmClient)' == ''">pnpm</DefaultNpmClient>
+    <DefaultItemExcludes>$(DefaultItemExcludes);$(ViewPackageRoot)node_modules\**;$(ViewPackageRoot)dist\**</DefaultItemExcludes>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="$(ViewPackageRoot)**" />
+    <None Remove="$(ViewPackageRoot)**" />
+    <None Include="$(ViewPackageRoot)**" Exclude="$(ViewPackageRoot)node_modules\**;$(ViewPackageRoot)dist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="$(ViewPackageRoot)\dist\index.js;$(ViewPackageRoot)\dist\style.css" />
+  </ItemGroup>
+
+  <Target Name="NpmInstall">
+    <Exec WorkingDirectory="$(ViewPackageRoot)" Command="$(DefaultNpmClient) install" />
+  </Target>
+
+  <Target Name="PreBuild" DependsOnTargets="NpmInstall" BeforeTargets="PreBuildEvent" Condition="$(Configuration) == 'Release' OR !Exists('$(ViewPackageRoot)dist')">
+    <Exec WorkingDirectory="$(ViewPackageRoot)" Command="$(DefaultNpmClient) build" />
+  </Target>
+
+  <Target Name="SetFileWatcherPath" BeforeTargets="BeforeCompile">
+    <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+      <_ViewPackageRootFullPath>$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(ViewPackageRoot)').Replace('\','\\'))</_ViewPackageRootFullPath>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="WriteSpaConfigurationToDisk" BeforeTargets="AssignTargetPaths">
+    <PropertyGroup>
+      <_ViewDebugConfigFilename>$(IntermediateOutputPath)dev_config</_ViewDebugConfigFilename>
+      <_ViewPackageRootFullPath>$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(ViewPackageRoot)').Replace('\','\\'))</_ViewPackageRootFullPath>
+    </PropertyGroup>
+    <ItemGroup>
+      <_ViewDebugConfigLines Include="$(_ViewPackageRootFullPath)" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(_ViewDebugConfigFilename)" Lines="@(_ViewDebugConfigLines)" WriteOnlyWhenDifferent="true" Overwrite="true" />
+
+    <ItemGroup Condition="$(Configuration) == 'Debug'">
+      <EmbeddedResource Include="$(_ViewDebugConfigFilename)" />
+    </ItemGroup>
+  </Target>
+</Project>
