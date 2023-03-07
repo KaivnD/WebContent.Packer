@@ -1,5 +1,7 @@
 # WebContent.Packer
 
+[![Nuget](https://img.shields.io/nuget/v/WebContent.Packer?style=flat-square)](https://www.nuget.org/packages/WebContent.Packer/#readme-body-tab)
+
 Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js
 
 Usage

@@ -5,11 +5,13 @@
     <title>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</title>
     <summary>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</summary>
     <description>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</description>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <authors>KaivnD</authors>
     <owners>KaivnD</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <releaseNotes>Pack web contents into embedded resources, compatible with vite, webpack, rollup or any other, even vanilla js</releaseNotes>
     <tags>web content pack</tags>
+    <repository type="git" url="https://github.com/KaivnD/WebContent.Packer.git" branch="master" />
+    <readme>README.md</readme>
   </metadata>
 </package>
